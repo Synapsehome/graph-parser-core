@@ -6,7 +6,7 @@ FILE *pSrc = NULL;
 char *pBuff = NULL;
 
 uint8_t
-read_source_graph(char* name, void* out)
+read_source_graph(char* name, void* out, uint32_t *buffSize)
 {
     pSrc = fopen(name, "r");
     
@@ -32,7 +32,8 @@ read_source_graph(char* name, void* out)
     fclose(pSrc);
 
     printf("%s\n", pBuff);
-    printf("!"); 
+
+    *buffSize = size + 1; 
 
     free(pBuff);
     return 0;
