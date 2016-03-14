@@ -21,6 +21,8 @@ main(int argc, char* argv[])
     
 
     printf("Readed %u bytes\n", buffSize);
+
+    parse_graph(pBuff, buffSize);
     
     /*uint32_t i;
     for(i = 0; i < buffSize; i++) {
@@ -30,6 +32,7 @@ main(int argc, char* argv[])
     }
     */
 
+    /*
     root = NULL;
 
     struct node tmp;
@@ -47,18 +50,7 @@ main(int argc, char* argv[])
     tmp.size = 33;
     push_back(&root, tmp);
 
-    //printf("aa %d %d", root->name, root->size);
+    print_list(root);*/
 
-    /*tmp.name = 2;
-    tmp.size = 22;
-    
-    push_back(root, tmp);
-
-    tmp.name = 3;
-    tmp.size = 33;
-
-    push_back(root, tmp);*/
-
-    print_list(root);
     return 0;
 }
