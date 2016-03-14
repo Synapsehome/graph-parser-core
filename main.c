@@ -19,16 +19,46 @@ main(int argc, char* argv[])
         return ret;
     }
     
-    root = (struct node*)malloc(sizeof(struct node));
-    init_empty_node(root);
 
-    uint32_t i;
+    printf("Readed %u bytes\n", buffSize);
+    
+    /*uint32_t i;
     for(i = 0; i < buffSize; i++) {
         if(pBuff[i] == '\n') {
             printf("T");
         }
     }
+    */
 
+    root = NULL;
 
+    struct node tmp;
+    init_empty_node(&tmp);
+    
+    tmp.name = 1;
+    tmp.size = 11;
+    push_back(&root, tmp);
+
+    tmp.name = 2;
+    tmp.size = 22;
+    push_back(&root, tmp);
+
+    tmp.name = 3;
+    tmp.size = 33;
+    push_back(&root, tmp);
+
+    //printf("aa %d %d", root->name, root->size);
+
+    /*tmp.name = 2;
+    tmp.size = 22;
+    
+    push_back(root, tmp);
+
+    tmp.name = 3;
+    tmp.size = 33;
+
+    push_back(root, tmp);*/
+
+    print_list(root);
     return 0;
 }

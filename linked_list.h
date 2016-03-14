@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <inttypes.h>
+#include <stdlib.h>
 
 struct node {
     uint32_t *vertices;
