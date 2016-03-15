@@ -91,3 +91,34 @@ void generate_complete(uint32_t len)
 
     fclose(f);
 }
+
+void generate_dandelion(uint32_t len)
+{
+    FILE *f;
+    uint32_t i;
+    f = fopen ("out", "w+");
+
+    /*Root vertex*/
+
+    fprintf(f, "1 -->");
+    for (i = 2; i <= len; i++) {
+        fprintf(f, " %d", i);
+    }
+
+    fprintf(f, "\n\n");
+
+    for (i = 2; i <= len; i++) {
+        if (i == 2) {
+            fprintf(f, "2 --> 1 3\n");
+        } else if (i == len) {
+            fprintf(f, "%d --> 1 %d\n", len, len - 1);
+        } else {
+            fprintf(f, "%d --> 1 %d %d\n", i, i - 1, i + 1);
+        }
+
+        if (i != len)
+            fprintf(f, "\n");
+    }
+
+    fclose(f);
+}

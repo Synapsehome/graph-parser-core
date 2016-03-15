@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     printf("[Read from file file: 'f']\n[Generate line: 'l']\n");
     printf("[Generate ring: 'r']\n");
     printf("[Generate star: 's']\n");
-    printf("[Generate complete graph: 'c']\n");
+    printf("[Generate complete graph: 'c']\n[Generate dandelion: 'd']\n");
     printf("[Exit: 'q']\n");
 
     char option;
@@ -36,7 +36,6 @@ READARG:
                 parse_graph(pBuff, buffSize, &root);
 
                 print_list(root);
-
                 erase_list(root);
 
                 free(pBuff);
@@ -45,55 +44,27 @@ READARG:
             break;
         case 'l': {
                 printf("Generate line. Please, enter length:\n");
-                unsigned char length;
-                //read_length(&length, 1);
-
-                while (!(length > 1)) {
-                    scanf("%d", &length);
-                    if (!(length > 1))
-                        printf("Length too small, chose enter another value\n");
-                } 
-
-                generate_line(length);
+                generate_line(read_length(1));
             }
             break;
         case 'r': {
                 printf("Generate ring. Please, enter length:\n");
-                unsigned char length = 0;
-
-                while (!(length > 2)) {
-                    scanf("%d", &length);
-                    if (!(length > 2))
-                        printf("Length too small, chose enter another value\n");
-                }
-
-                generate_circle(length);
+                generate_circle(read_length(2));
             }
             break;
         case 's': {
                 printf("Generate star. Please, enter length:\n");
-                unsigned char length = 0;
-
-                while (!(length > 2)) {
-                    scanf("%d", &length);
-                    if (!(length > 2))
-                        printf("Length too small, chose enter another value\n");
-                }
-
-                generate_star(length);
+                generate_star(read_length(2));
         }
             break;
         case 'c': {
                 printf("Complete graph. Please, enter length:\n");
-                unsigned char length = 0;
-
-                while (!(length > 2)) {
-                    scanf("%d", &length);
-                    if (!(length > 2))
-                        printf("Length too small, chose enter another value\n");
-                }
-
-                generate_complete(length);
+                generate_complete(read_length(2));
+            }
+            break;
+        case 'd': {
+                printf("Generate dandelion. Please, enter size:\n");
+                generate_dandelion(read_length(2));
             }
             break;
         case 'q' : {

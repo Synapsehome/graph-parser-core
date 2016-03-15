@@ -23,9 +23,7 @@ uint8_t read_source_graph(char *name, void **out, \
 
     *out = malloc(size + 1);
     memset(*out, 0, size + 1);
-    fread(*out, size, 1, f); 
-    //out[size] = '\0';
-    
+    fread(*out, size, 1, f);
 
     *buffSize = size + 1;
     *file = f;
@@ -90,7 +88,6 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
             char* vbuff = malloc(s2 - s1 + 1);
             memset(vbuff, 0, s2 - s1 + 1);
             memcpy(vbuff, &local_buff[s1], s2 - s1 + 1);
-            //printf("vvv [%s]\n", vbuff);
             vert_arr[vert_count] = (uint32_t)atoi(vbuff);
             vert_count++;
             free(vbuff);
@@ -106,7 +103,6 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
             char* vbuff = malloc(len - i + 1);
             memset(vbuff, 0, len - i + 1);
             memcpy(vbuff, &local_buff[s1], len - i);
-            printf("last vertex [%s]\n", vbuff);
             vert_arr[vert_count] = (uint32_t)atoi(vbuff);
             vert_count++;
             free(vbuff);
@@ -153,3 +149,16 @@ void parse_graph(char* buff, uint32_t size, struct node **root)
 
     *root = tmp_root;
 }
+
+uint32_t read_length(uint32_t min) 
+{
+    unsigned int length = 0;
+    
+    while (!(length > min)) {
+        scanf("%d", &length);
+        if (!(length > min))
+            printf("Too small value, chose another\n");
+    }
+    return length;
+}
+
