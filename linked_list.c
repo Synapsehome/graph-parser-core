@@ -1,7 +1,6 @@
 #include "linked_list.h"
 
-void
-init_empty_node(struct node *p)
+void init_empty_node(struct node *p)
 {
     return;
     if (p != NULL) { 
@@ -12,8 +11,7 @@ init_empty_node(struct node *p)
     }
 }
 
-struct node* 
-insert_node(struct node *p)
+struct node *insert_node(struct node *p)
 {
     if (p == NULL)
         return NULL;
@@ -25,16 +23,14 @@ insert_node(struct node *p)
     }
 }
 
-void
-fill_node(struct node *p, struct node data)
+void fill_node(struct node *p, struct node data)
 {
     p->name = data.name;
     p->size = data.size;
     p->vertices = data.vertices;
 }
 
-void
-push_back(struct node **root, struct node data)
+void push_back(struct node **root, struct node data)
 {
     struct node *p = *root;
 
@@ -58,8 +54,7 @@ push_back(struct node **root, struct node data)
     }
 }
 
-void
-print_list(struct node* root)
+void print_list(struct node* root)
 {
     struct node *p = root;
     uint32_t t = 0;

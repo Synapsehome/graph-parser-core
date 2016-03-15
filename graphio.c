@@ -5,8 +5,8 @@
 
 #include "linked_list.h"
 
-uint8_t
-read_source_graph(char *name, void **out, uint32_t *buffSize, FILE **file)
+uint8_t read_source_graph(char *name, void **out, \
+        uint32_t *buffSize, FILE **file)
 {
     FILE *f = fopen(name, "r");
 
@@ -32,8 +32,7 @@ read_source_graph(char *name, void **out, uint32_t *buffSize, FILE **file)
     return 0;
 }
 
-int32_t
-find_symbol(char* buff, char byte, uint32_t size)
+int32_t find_symbol(char* buff, char byte, uint32_t size)
 {
     uint32_t i;
     for (i = 0; i < size; i++) {
@@ -44,8 +43,7 @@ find_symbol(char* buff, char byte, uint32_t size)
     return -1;
 }
 
-void
-parse_current_line(char* buff, uint32_t start, uint32_t end, \
+void parse_current_line(char* buff, uint32_t start, uint32_t end, \
         uint32_t **ppvertices, uint32_t *psize, uint32_t *pname)
 {
     uint32_t len = end - start + 1,
@@ -124,8 +122,7 @@ parse_current_line(char* buff, uint32_t start, uint32_t end, \
     return;
 }
 
-void
-parse_graph(char* buff, uint32_t size, struct node **root)
+void parse_graph(char* buff, uint32_t size, struct node **root)
 {
     uint32_t start = 0,
              end = 0,
