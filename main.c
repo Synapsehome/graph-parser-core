@@ -18,61 +18,9 @@ main(int argc, char* argv[])
         return ret;
     }
 
-    //printf("%s\n", pBuff);
-
-    //FILE *f = fopen("in", "r");
-
-    /*if (f != NULL) {
-        fclose(f);
-    }*/
-
-
-    //free(pBuff);
-    
-
-    //printf("Readed %u bytes\n", buffSize);
-
-    //root = NULL;
-    //
     struct node *root = NULL;
     
     parse_graph(pBuff, buffSize, &root);
-    
-    /*uint32_t i;
-    for(i = 0; i < buffSize; i++) {
-        if(pBuff[i] == '\n') {
-            printf("T");
-        }
-    }
-    */
-
-    
-    /*struct node *root = NULL;
-
-    struct node tmp;
-    init_empty_node(&tmp);
-    
-    tmp.name = 1;
-    tmp.size = 11;
-    push_back(&root, tmp);
-
-    tmp.name = 2;
-    tmp.size = 22;
-    push_back(&root, tmp);
-
-    tmp.name = 3;
-    tmp.size = 33;
-    push_back(&root, tmp);
-
-    tmp.name = 4;
-    tmp.size = 44;
-    push_back(&root, tmp);
-
-    tmp.name = 5;
-    tmp.size = 55;
-    push_back(&root, tmp);*/
-
-
     print_list(root);
 
     free(pBuff);

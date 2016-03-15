@@ -10,10 +10,6 @@ read_source_graph(char *name, void **out, uint32_t *buffSize, FILE **file)
 {
     FILE *f = fopen(name, "r");
 
-    /*if (f != NULL) {
-        fclose(f);
-    }*/
-    
     if (f == NULL) {
         printf("[ERROR] Can't open source graph\n");
         return 1;
@@ -23,9 +19,6 @@ read_source_graph(char *name, void **out, uint32_t *buffSize, FILE **file)
 
     fseek(f, 0, SEEK_END);
     size = ftell(f);
-
-    //printf("size ftell: %d\n", size);
-
     rewind(f);
 
     *out = malloc(size + 1);
@@ -35,7 +28,6 @@ read_source_graph(char *name, void **out, uint32_t *buffSize, FILE **file)
 
     *buffSize = size + 1;
     *file = f;
-    //fclose(f); 
 
     return 0;
 }
@@ -64,8 +56,6 @@ parse_current_line(char* buff, uint32_t start, uint32_t end, \
     memcpy(local_buff, &buff[start], len - 1);
 
     int32_t dash = find_symbol(local_buff, '-', len);
-    //struct node* nd = (struct node*)malloc(sizeof (struct node));
-    //init_empty_node(nd);
 
     uint32_t i;
     for (i = 0; i < len; i++) {
@@ -101,7 +91,6 @@ parse_current_line(char* buff, uint32_t start, uint32_t end, \
             char* vbuff = malloc(s2 - s1 + 1);
             memset(vbuff, 0, s2 - s1 + 1);
             memcpy(vbuff, &local_buff[s1], s2 - s1 + 1);
-            //printf("VERTICES: %s\n", vbuff);
             vert_arr[vert_count] = atoi(vbuff);
             vert_count++;
             free(vbuff);
@@ -119,7 +108,6 @@ parse_current_line(char* buff, uint32_t start, uint32_t end, \
             memcpy(vbuff, &local_buff[s1], len - i);
             vert_arr[vert_count] = atoi(vbuff);
             vert_count++;
-            //printf("VERTICES: %s\n", vbuff);
             free(vbuff);
             break;
         }
@@ -150,8 +138,6 @@ parse_graph(char* buff, uint32_t size, struct node **root)
             start = end;
             end = i;
 
-            //printf("before parse: %d %d", start, end);
-
             if ((end - start) <= 2)
                 continue;
 
@@ -161,29 +147,9 @@ parse_graph(char* buff, uint32_t size, struct node **root)
             parse_current_line(buff, (start == 0) ? start : start + 1, end, \
                     &nd.vertices, &nd.size, &nd.name);
 
-            push_back(&tmp_root, nd);
-
-            //push_back(proot, nd);
-
-            //push_back(proot, nd);
-            
-            //printf("0x%x\n", root);
-            /*printf("Name: %d |", nd.name);
-            uint32_t t = 0;
-            for(t = 0; t < nd.size; t++) {
-                printf(" %d", nd.vertices[t]);
-            }
-            printf("\n");*/
-            
-            //struct node *pLocalRoot = NULL;
-            //struct node nd;
-            //init_empty_node(&nd);
-            //break;
-            
+            push_back(&tmp_root, nd);            
         }  
     }
 
     *root = tmp_root;
-
-    //print_list(pLocalRoot);
 }

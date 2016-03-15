@@ -36,13 +36,9 @@ fill_node(struct node *p, struct node data)
 void
 push_back(struct node **root, struct node data)
 {
-    //printf("pb called\n");
-    //if (data.name == 4) {
-   //     printf("pb called\n");
-   // }
     struct node *p = *root;
+
     if (p == NULL) {
-        //printf("here!!");
         struct node* p = (struct node*)malloc(sizeof(struct node));
         init_empty_node(p);
         fill_node(p, data);
@@ -50,12 +46,8 @@ push_back(struct node **root, struct node data)
         return;
     }
 
-    //printf("HERE!\n");
-    //
-    //
     for (;;) {
         if (p->next_node != NULL) {
-            //printf("name: %d next_node 0x%x\n", p->name, p->next_node);
             p = p->next_node;
         } else {
             p->next_node = malloc(sizeof(struct node));
@@ -64,33 +56,6 @@ push_back(struct node **root, struct node data)
             return;
         }
     }
-    
-    /*if (p->next_node == NULL) {
-        //struct node* next = insert_node(p);
-        p->next_node = malloc(sizeof(struct node));
-        fill_node(p->next_node, data);
-        //printf("Next rott filled\n");
-        return;
-    } else {
-        p = p-> next_node;
-        return;
-        //printf("2\n");
-        struct node *p = *root;
-        while (1) {
-            //p = p->next_node;
-            printf("Here\n");
-            if (p->next_node == NULL) {
-                printf("lala1\n");
-                struct node *next = insert_node(p);
-                printf("lala2l\n");
-                fill_node(next, data);
-                return;
-            }
-            if (p->next_node != NULL)
-                p = p->next_node;
-        }
-    }*/
-
 }
 
 void
