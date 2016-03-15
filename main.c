@@ -5,24 +5,38 @@
 
 #include "linked_list.h"
 
-//source graph
-extern char *pBuff; 
-
 int
 main(int argc, char* argv[]) 
 {
+    FILE *f;
     uint8_t ret;
+    char* pBuff;
     uint32_t buffSize;
 
-    if ((ret = read_source_graph("in", pBuff, &buffSize)) != 0) {
+    if ((ret = read_source_graph("in", &pBuff, &buffSize, &f)) != 0) {
         printf("Closing\n");
         return ret;
     }
+
+    //printf("%s\n", pBuff);
+
+    //FILE *f = fopen("in", "r");
+
+    /*if (f != NULL) {
+        fclose(f);
+    }*/
+
+
+    //free(pBuff);
     
 
-    printf("Readed %u bytes\n", buffSize);
+    //printf("Readed %u bytes\n", buffSize);
 
-    parse_graph(pBuff, buffSize);
+    //root = NULL;
+    //
+    struct node *root = NULL;
+    
+    parse_graph(pBuff, buffSize, &root);
     
     /*uint32_t i;
     for(i = 0; i < buffSize; i++) {
@@ -32,8 +46,8 @@ main(int argc, char* argv[])
     }
     */
 
-    /*
-    root = NULL;
+    
+    /*struct node *root = NULL;
 
     struct node tmp;
     init_empty_node(&tmp);
@@ -50,7 +64,19 @@ main(int argc, char* argv[])
     tmp.size = 33;
     push_back(&root, tmp);
 
-    print_list(root);*/
+    tmp.name = 4;
+    tmp.size = 44;
+    push_back(&root, tmp);
+
+    tmp.name = 5;
+    tmp.size = 55;
+    push_back(&root, tmp);*/
+
+
+    print_list(root);
+
+    free(pBuff);
+    fclose(f);
 
     return 0;
 }

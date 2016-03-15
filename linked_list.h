@@ -8,5 +8,3 @@ struct node {
     uint32_t name;
     struct node *next_node;
 };
-
-extern struct node *root;
