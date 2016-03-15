@@ -2,7 +2,6 @@
 
 void init_empty_node(struct node *p)
 {
-    return;
     if (p != NULL) { 
         p->size = 0;
         p->name = 0;
@@ -67,7 +66,22 @@ void print_list(struct node* root)
             printf(" %d", p->vertices[i]);
         }
         printf("]\n");
-
         p = p->next_node;
+    }
+}
+
+void erase_list(struct node *root)
+{
+    struct node *p = root;
+    for (;;) {
+        if (p != NULL) {
+            struct node *tmp = p->next_node;
+            if (p->vertices != NULL)
+                free(p->vertices);
+            free(p);
+            p = tmp;
+        } else {
+            return;
+        }
     }
 }

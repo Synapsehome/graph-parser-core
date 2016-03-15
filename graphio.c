@@ -22,9 +22,10 @@ uint8_t read_source_graph(char *name, void **out, \
     rewind(f);
 
     *out = malloc(size + 1);
+    memset(*out, 0, size + 1);
     fread(*out, size, 1, f); 
-    out[size] = '\0';
-
+    //out[size] = '\0';
+    
 
     *buffSize = size + 1;
     *file = f;
@@ -72,7 +73,7 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
     uint32_t uname = atoi(name);
     free(name);
 
-    uint32_t *vert_arr = malloc(num_spaces),
+    uint32_t *vert_arr = malloc(num_spaces * sizeof(uint32_t)),
              vert_count = 0;
 
     int32_t s1 = dash + 3, s2 = 0;
@@ -89,7 +90,8 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
             char* vbuff = malloc(s2 - s1 + 1);
             memset(vbuff, 0, s2 - s1 + 1);
             memcpy(vbuff, &local_buff[s1], s2 - s1 + 1);
-            vert_arr[vert_count] = atoi(vbuff);
+            //printf("vvv [%s]\n", vbuff);
+            vert_arr[vert_count] = (uint32_t)atoi(vbuff);
             vert_count++;
             free(vbuff);
 
@@ -98,26 +100,27 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
         }
     }
 
-    //get last numvertices form the end
+    //get last vertex form the end
     for (i = len - 1; i > 0; i--) {
         if (local_buff[i] == ' ') {
             char* vbuff = malloc(len - i + 1);
             memset(vbuff, 0, len - i + 1);
             memcpy(vbuff, &local_buff[s1], len - i);
-            vert_arr[vert_count] = atoi(vbuff);
+            printf("last vertex [%s]\n", vbuff);
+            vert_arr[vert_count] = (uint32_t)atoi(vbuff);
             vert_count++;
             free(vbuff);
             break;
         }
     }
-
+    
     if (pname != NULL)
         *pname = uname;
     if (psize != NULL)
         *psize = vert_count;
     if (ppvertices != NULL)
         *ppvertices = vert_arr;
-
+    
     free(local_buff);
     return;
 }
@@ -137,14 +140,14 @@ void parse_graph(char* buff, uint32_t size, struct node **root)
 
             if ((end - start) <= 2)
                 continue;
-
+            
             struct node nd;
             init_empty_node(&nd);
 
             parse_current_line(buff, (start == 0) ? start : start + 1, end, \
                     &nd.vertices, &nd.size, &nd.name);
 
-            push_back(&tmp_root, nd);            
+            push_back(&tmp_root, nd);
         }  
     }
 
