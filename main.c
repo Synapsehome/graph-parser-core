@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "linked_list.h"
+#include "matrix.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -25,6 +26,9 @@ READARG:
 
     switch (option) {
         case 'f': {
+                struct node *root = NULL;
+                uint32_t vertex_count = 0;
+                
                 printf("Reading from file\n");
                 if ((ret = read_source_graph("out", \
                                 &pBuff, &buffSize, &f)) != 0) {
@@ -32,12 +36,33 @@ READARG:
                     return ret;
                 }
 
-                struct node *root = NULL;
-                parse_graph(pBuff, buffSize, &root);
+                parse_graph(pBuff, buffSize, &root, &vertex_count);
+                printf("[BUG IN STAR. LOST LAST VERTEX]%d vertices detected\n", \
+                       vertex_count);
 
                 print_list(root);
-                erase_list(root);
 
+                struct matrix_t mx;
+                init_matrix(&mx, vertex_count);
+                
+                uint32_t i, j;
+                for (i = 1; i <= vertex_count; i++) {
+                    for (j = 1; j <= vertex_count; j++) {
+                        if (i != j) {
+                            set_elem(&mx, i, j, \
+                                     find_path_between_vertices(root, i, j));
+                        } else {
+                            /*Diagonal elements*/
+                            set_elem(&mx, i, j, \
+                                     get_vertex_size_by_name(i, root) + 1);
+                        }
+                    }
+                }
+
+                print_matrix(&mx);
+                free(mx.elems);
+
+                erase_list(root);
                 free(pBuff);
                 fclose(f);
             }

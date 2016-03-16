@@ -121,11 +121,13 @@ void parse_current_line(char* buff, uint32_t start, uint32_t end, \
     return;
 }
 
-void parse_graph(char* buff, uint32_t size, struct node **root)
+void parse_graph(char* buff, uint32_t size, \
+                 struct node **root, uint32_t *vertcount)
 {
     uint32_t start = 0,
              end = 0,
-             i = 0;
+             i = 0,
+             vertex_count = 0;
 
     struct node *tmp_root = NULL;
 
@@ -144,10 +146,12 @@ void parse_graph(char* buff, uint32_t size, struct node **root)
                     &nd.vertices, &nd.size, &nd.name);
 
             push_back(&tmp_root, nd);
+            vertex_count++;
         }  
     }
 
     *root = tmp_root;
+    *vertcount = vertex_count;
 }
 
 uint32_t read_length(uint32_t min) 
