@@ -6,7 +6,8 @@
 #include "linked_list.h"
 #include "matrix.h"
 
-int main(int argc, char* argv[]) 
+int
+main(int argc, char* argv[]) 
 {
     FILE *f;
     uint8_t ret;
